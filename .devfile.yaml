@@ -1,0 +1,61 @@
+schemaVersion: 2.1.0
+metadata:
+  name: hello-world-quarkus
+  namespace: opentlc-mgr-devspaces
+attributes:
+  che-theia.eclipse.org/sidecar-policy: mergeImage
+  metadata-name-field: generateName
+  metadata-name-original-value: hello-world-quarkus
+projects:
+  - git:
+      remotes:
+        origin: 'https://github.com/liuxiaoyu-git/hello-world-quarkus.git'
+    name: hello-world-quarkus
+components: []
+commands:
+  - exec:
+      commandLine: mvn -DskipTests clean install
+      component: tools
+      group:
+        kind: build
+      workingDir: '${PROJECTS_ROOT}/hello-world-quarku'
+    id: 1-build
+  - exec:
+      commandLine: 'mvn quarkus:run'
+      component: tools
+      group:
+        kind: run
+      workingDir: '${PROJECTS_ROOT}/hello-world-quarku'
+    id: 2-run
+  - exec:
+      commandLine: 'mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"'
+      component: tools
+      group:
+        kind: run
+      workingDir: '${PROJECTS_ROOT}/hello-world-quarku'
+    id: 3-run-in-debug
+  - exec:
+      commandLine: mvn verify
+      component: tools
+      group:
+        kind: test
+      workingDir: '${PROJECTS_ROOT}/hello-world-quarku'
+    id: 4-run-tests
+  - exec:
+      commandLine: |
+        echo
+        echo "Before you can deploy this application to an openshift cluster,"
+        echo "you must run 'oc login ...' in the tools terminal."
+        echo
+      component: tools
+      group:
+        kind: run
+      workingDir: '${PROJECTS_ROOT}/hello-world-quarku'
+    id: 5-log-into-cluster
+  - exec:
+      commandLine: 'mvn fabric8:deploy -Popenshift -DskipTests'
+      component: tools
+      group:
+        kind: run
+      workingDir: '${PROJECTS_ROOT}/hello-world-quarku'
+    id: 6-deploy-to-openshift
