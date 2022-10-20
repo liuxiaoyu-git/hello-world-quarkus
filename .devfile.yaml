@@ -3,30 +3,18 @@ metadata:
   name: hello-world-quarkus
 attributes:
   controller.devfile.io/storage-type: ephemeral
-components:
-  - name: go-cli
-    container:
-      image: quay.io/devfile/universal-developer-image:ubi8-latest
-      endpoints:
-        - name: webapp
-          targetPort: 8080
-      memoryLimit: 1Gi
-      memoryRequest: 256Mi
-  - name: projects
-    volume: {ephemeral: true}
 commands:
-  - id: run
-    exec:
-      component: go-cli
-      commandLine: "go run main.go"
-      workingDir: $PROJECT_SOURCE
-  - id: stop
-    exec:
-      component: go-cli
-      commandLine: "kill $(pidof go)"
-      workingDir: $PROJECT_SOURCE
-  - id: build
-    exec:
-      component: go-cli
-      commandLine: "go main.go"
-      workingDir: $PROJECT_SOURCE
+  - exec:
+      commandLine: mvn -DskipTests clean install
+      component: tools
+      group:
+        kind: build
+      workingDir: '${PROJECTS_ROOT}/hello-world-quarkus'
+    id: 1-build
+  - exec:
+      commandLine: 'mvn spring-boot:run'
+      component: tools
+      group:
+        kind: run
+      workingDir: '${PROJECTS_ROOT}/hello-world-quarkus'
+    id: 2-run
