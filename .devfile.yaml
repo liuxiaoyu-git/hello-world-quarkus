@@ -24,7 +24,7 @@ commands:
       commandLine: ./mvnw compile quarkus:dev
       component: tools
       group:
-        kind: dev
+        kind: build
       workingDir: '${PROJECTS_ROOT}/hello-world-quarkus'
     id: 1-dev-mode
   - exec:
