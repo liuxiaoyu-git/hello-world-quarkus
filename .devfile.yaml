@@ -1,8 +1,24 @@
-schemaVersion: 2.1.0
+schemaVersion: 2.2.0
 metadata:
   name: hello-world-quarkus
 attributes:
   controller.devfile.io/storage-type: ephemeral
+projects:
+  - git:
+      remotes:
+        origin: 'https://github.com/liuxiaoyu-git/hello-world-quarkus.git'
+    name: hello-world-quarkus
+components:
+  - name: tools
+    container:
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      endpoints:
+        - name: webapp
+          targetPort: 8080
+      memoryLimit: 1Gi
+      memoryRequest: 256Mi
+  - name: projects
+    volume: {ephemeral: true}
 commands:
   - exec:
       commandLine: mvn -DskipTests clean install
