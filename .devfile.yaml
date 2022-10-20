@@ -21,14 +21,14 @@ components:
     volume: {ephemeral: true}
 commands:
   - exec:
-      commandLine: mvn -DskipTests clean install
+      commandLine: ./mvnw compile quarkus:dev
       component: tools
       group:
-        kind: build
+        kind: dev
       workingDir: '${PROJECTS_ROOT}/hello-world-quarkus'
-    id: 1-build
+    id: 1-dev-mode
   - exec:
-      commandLine: 'mvn spring-boot:run'
+      commandLine: './mvnw package'
       component: tools
       group:
         kind: run
