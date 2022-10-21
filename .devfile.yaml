@@ -10,7 +10,7 @@ components:
       endpoints:
         - name: webapp
           targetPort: 8080
-      memoryLimit: 3Gi
+      memoryLimit: 4Gi
       memoryRequest: 256Mi
   - name: projects
     volume: {ephemeral: true}
@@ -44,7 +44,7 @@ commands:
       workingDir: '${PROJECTS_ROOT}/hello-world-quarkus'
     id: 4-run-jar
   - exec:
-      commandLine: './mvnw install -Dnative -Dquarkus.native.native-image-xmx=3g'
+      commandLine: './mvnw install -Dnative -DskipTests -Dquarkus.native.native-image-xmx=4g'
       component: tools
       group:
         kind: build
