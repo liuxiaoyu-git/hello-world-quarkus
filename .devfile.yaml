@@ -3,11 +3,6 @@ metadata:
   name: hello-world-quarkus
 attributes:
   controller.devfile.io/storage-type: ephemeral
-projects:
-  - git:
-      remotes:
-        origin: 'https://github.com/liuxiaoyu-git/hello-world-quarkus.git'
-    name: hello-world-quarkus
 components:
   - name: tools
     container:
