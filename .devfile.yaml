@@ -21,16 +21,23 @@ components:
     volume: {ephemeral: true}
 commands:
   - exec:
-      commandLine: ./mvnw compile quarkus:dev
+      commandLine: ./mvnw quarkus:dev
       component: tools
       group:
         kind: build
       workingDir: '${PROJECTS_ROOT}/hello-world-quarkus'
-    id: 1-build
+    id: 1-build-dev
   - exec:
-      commandLine: './mvnw package'
+      commandLine: './mvnw test'
+      component: tools
+      group:
+        kind: test
+      workingDir: '${PROJECTS_ROOT}/hello-world-quarkus'
+    id: 2-test
+- exec:
+      commandLine: './mvnw install'
       component: tools
       group:
         kind: run
       workingDir: '${PROJECTS_ROOT}/hello-world-quarkus'
-    id: 2-run
+    id: 2-package-run
