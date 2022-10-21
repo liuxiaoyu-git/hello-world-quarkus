@@ -21,7 +21,7 @@ components:
     volume: {ephemeral: true}
 commands:
   - exec:
-      commandLine: ./mvnw quarkus:dev
+      commandLine: './mvnw quarkus:dev'
       component: tools
       group:
         kind: build
@@ -40,4 +40,4 @@ commands:
       group:
         kind: run
       workingDir: '${PROJECTS_ROOT}/hello-world-quarkus'
-    id: 2-package-run
+    id: 3-package-run
