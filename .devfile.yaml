@@ -6,7 +6,8 @@ attributes:
 components:
   - name: tools
     container:
-      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      ## image: quay.io/devfile/universal-developer-image:ubi8-latest
+      image: registry.access.redhat.com/quarkus/mandrel-21-rhel8:21.3-34.1665583662
       endpoints:
         - name: webapp
           targetPort: 8080
