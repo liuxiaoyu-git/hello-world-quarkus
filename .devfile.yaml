@@ -15,7 +15,7 @@ components:
       endpoints:
         - name: webapp
           targetPort: 8080
-      memoryLimit: 1Gi
+      memoryLimit: 3Gi
       memoryRequest: 256Mi
   - name: projects
     volume: {ephemeral: true}
