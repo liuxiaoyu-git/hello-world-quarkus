@@ -34,7 +34,7 @@ commands:
         kind: test
       workingDir: '${PROJECTS_ROOT}/hello-world-quarkus'
     id: 2-test
-- exec:
+  - exec:
       commandLine: './mvnw install'
       component: tools
       group:
