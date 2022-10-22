@@ -1,8 +1,6 @@
 schemaVersion: 2.1.0
 metadata:
   name: hello-world-quarkus
-attributes:
-  controller.devfile.io/storage-type: ephemeral
 components:
   - name: tools
     container:
@@ -15,8 +13,6 @@ components:
           targetPort: 8080
       memoryLimit: 4Gi
       memoryRequest: 256Mi
-  - name: projects
-    volume: {ephemeral: true}
 commands:
   - exec:
       commandLine: './mvnw quarkus:dev'
